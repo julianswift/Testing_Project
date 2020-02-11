@@ -1,25 +1,32 @@
 <template>
   <v-app>
-    <v-app-bar
-      app
-      color="primary"
-      dark
-    >
-    </v-app-bar>
+
+    <Header />
 
     <v-content>
-      Initilization of The Project
+
+      lorem1500
+
     </v-content>
 
+
+    <Footer />
   </v-app>
 </template>
 
 <script>
+import Header from '@/components/static/Header'
+import Footer from '@/components/static/Footer'
+
 
 export default {
   name: 'App',
+  components: {
+    Header,
+    Footer,
+  },
   data: () => ({
-    //
+    
   }),
 };
 </script>
