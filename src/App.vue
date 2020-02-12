@@ -4,11 +4,8 @@
     <Header />
 
     <v-content>
-
-      lorem1500
-
+      <router-view></router-view>
     </v-content>
-
 
     <Footer />
   </v-app>
