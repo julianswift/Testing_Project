@@ -5,7 +5,7 @@ Vue.use(VueRouter)
 
 /*** Simpler Hardcoded Way ***/
 
-/* import Home from '@/views/Home'
+import Home from '@/views/Home'
 import Mechanics from '@/views/Mechanics'
 import Body from '@/views/Body'
 import Spark from '@/views/Spark'
@@ -18,7 +18,7 @@ const routes = [
     component: Home
   },
   {
-    path: '/mechanics',
+    path: '/mechanics/:id',
     name: 'Mechanics',
     component: Mechanics
   },
@@ -37,7 +37,7 @@ const routes = [
     name: 'Bio',
     component: Bio
   }
-] */
+]
 
 /*...................................*/
 
@@ -50,17 +50,17 @@ const routes = [
 
 // For this example: name should be same with the filename
 // If you need to use different route name and filename then you should add one more param to object such as (path, name, filename)
-class Route {
+/* class Route {
   constructor (path, name) {
     this.path = path;
     this.name = name;
     this.component = this.setComponent(name)
-  }
+  } */
 
   // This is Lazy Loading Routes
   // It combines async component feature && code splitting feature
   // Please read more: https://router.vuejs.org/guide/advanced/lazy-loading.html#grouping-components-in-the-same-chunk
-  setComponent(name){
+/*   setComponent(name){
     return resolve => require(['../views/' + name + '.vue'], resolve);
   }
 }
@@ -71,9 +71,7 @@ const routes = [
   new Route('/body', 'Body'),
   new Route('/spark', 'Spark'),
   new Route('/bio', 'Bio'),
-]
-
-console.log(routes)
+] */
 
 const router = new VueRouter({
   mode: 'history',

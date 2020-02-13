@@ -1,10 +1,24 @@
-<template>
+ <template>
   <v-footer fixed padless>
     <v-card flat tile width="100%" class="red darken-2 text-center">
       <v-card-text>
-        <v-btn v-for="(link, key) in links" :key="key" class="mx-4" icon>
-          <v-icon size="24px">{{ link.icon }}</v-icon>
-        </v-btn>
+        <!-- If you don't need any params you can use basically -->
+        <!-- :to="link.pathName" (name field in the route object) -->
+        <!-- Otherwise, you need to use obj and tell it explicity -->
+        <!-- This example contains complex object structure rather than simple name string -->
+          <router-link 
+            v-for="(link, key) in links" :key="key"
+           :to="{name: link.pathName, params: link.params}"
+          >
+            <v-btn class="mx-4">
+              <span>{{link.pathName}}</span>
+            </v-btn>
+          </router-link>
+
+          <!-- TODO: Assignment: Create navigator buttons with a method  -->
+          <!-- without using using <router-link> approach -->
+          <!-- You'll find an example in Mechanics.vue if you stuck -->
+
       </v-card-text>
 
       <v-divider></v-divider>
@@ -24,22 +38,34 @@ export default {
     links: [
       {
         icon: "mdi-home",
-        pathName: ""
+        pathName: "Home",
+        params: {}
       },
       {
         icon: "mdi-email",
-        pathName: ""
+        pathName: "Mechanics",
+        params: {id: 1}
       },
       {
         icon: "mdi-calendar",
-        pathName: ""
+        pathName: "Body",
+        params: {}
       },
       {
         icon: "mdi-delete",
-        pathName: ""
-      }
+        pathName: "Spark",
+        params: {}
+      },
+      {
+        icon: "mdi-delete",
+        pathName: "Bio",
+        params: {}
+      },
     ]
-  })
+  }),
+  created() {
+    console.log('routers', this.$router)
+  }
 };
 </script>
 
