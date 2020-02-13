@@ -5,6 +5,11 @@
         {{$route.params}} <br>
 
         <v-btn @click="goToHome">Go To Home</v-btn>
+
+        <v-alert color="warning" >
+            If you try to reach without "/mechanics" without required param, you will get 404
+        </v-alert>
+
     </div>
 </template>
 

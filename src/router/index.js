@@ -5,6 +5,8 @@ Vue.use(VueRouter)
 
 /*** Simpler Hardcoded Way ***/
 
+import NotFound from '@/views/NotFound'
+
 import Home from '@/views/Home'
 import Mechanics from '@/views/Mechanics'
 import Body from '@/views/Body'
@@ -12,6 +14,24 @@ import Spark from '@/views/Spark'
 import Bio from '@/views/Bio'
 
 const routes = [
+  // If there is not matched case 
+  // You can redirect to any route
+  {
+    path: '*',
+    redirect: '404'
+  },
+  {
+    path: '/404',
+    name: 'NotFound',
+    component: NotFound,
+  },
+  // or basically you can register, any others route to particular component
+  // of course this time url won't change
+  /* {
+    path: '*',
+    name: 'NotFound',
+    component: NotFound,
+  }, */
   {
     path: '/',
     name: 'Home',
