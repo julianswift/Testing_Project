@@ -10,6 +10,9 @@ import NotFound from '@/views/NotFound'
 import Home from '@/views/Home'
 import Mechanics from '@/views/Mechanics'
 import Body from '@/views/Body'
+  import BodyFocus from '@/views/Body/BodyFocus'
+  import Geometry from '@/views/Body/Geometry'
+  import Meditation from '@/views/Body/Meditation'
 import Spark from '@/views/Spark'
 import Bio from '@/views/Bio'
 
@@ -35,7 +38,7 @@ const routes = [
   {
     path: '/',
     name: 'Home',
-    component: Home
+    component: Home,
   },
   {
     path: '/mechanics/:id',
@@ -45,7 +48,30 @@ const routes = [
   {
     path: '/body',
     name: 'Body',
-    component: Body
+    component: Body,
+    /* 
+      child path can't start with "/" if you use "/" this means you are defining this route in root level 
+      rather than http://localhost:8080/body/meditation
+      http://localhost:8080/meditation
+      
+    */
+    children: [
+      {
+        path: 'meditation/:mID',
+        name: 'Meditation',
+        component: Meditation
+      },
+      {
+        path: 'body-focus',
+        name: 'BodyFocus',
+        component: BodyFocus
+      },
+      {
+        path: 'geometry',
+        name: 'Geometry',
+        component: Geometry
+      },
+    ]
   },
   {
     path: '/spark',

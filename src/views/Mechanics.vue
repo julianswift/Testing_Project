@@ -10,6 +10,8 @@
             If you try to reach without "/mechanics" without required param, you will get 404
         </v-alert>
 
+        <h3>For header examples, take a look at <router-link to="body">BODY</router-link></h3>
+
     </div>
 </template>
 

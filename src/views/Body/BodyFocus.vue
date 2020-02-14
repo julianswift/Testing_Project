@@ -1,7 +1,6 @@
 <template>
     <div>
-        Spark
-        <h3>For header examples, take a look at <router-link to="body">BODY</router-link></h3>
+        BodyFocus
     </div>
 </template>
 

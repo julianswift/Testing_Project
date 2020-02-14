@@ -70,5 +70,7 @@ export default {
 </script>
 
 <style lang="css" scoped>
-
+a {
+    text-decoration: none;
+}
 </style>

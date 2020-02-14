@@ -1,7 +1,6 @@
 <template>
   <v-app>
-
-    <Header />
+    <Header :title="this.$route.name" :buttons="buttons[this.$route.name]" />
 
     <v-content>
       <router-view></router-view>
@@ -12,18 +11,72 @@
 </template>
 
 <script>
-import Header from '@/components/static/Header'
-import Footer from '@/components/static/Footer'
-
+import Header from "@/components/static/Header";
+import Footer from "@/components/static/Footer";
 
 export default {
-  name: 'App',
+  name: "App",
   components: {
     Header,
-    Footer,
+    Footer
   },
   data: () => ({
-    
+    buttons: {
+      Mechanics: [
+        {
+          name: "psychology",
+          pathName: "",
+          params: {}
+        },
+        {
+          name: "emotions",
+          pathName: "",
+          params: {}
+        },
+        {
+          name: "vocabulary",
+          pathName: "",
+          params: {}
+        }
+      ],
+      Body: [
+        {
+          name: "meditation",
+          pathName: "Meditation",
+          params: {mID: 1}
+        },
+        {
+          name: "body-focus",
+          pathName: "BodyFocus",
+          params: {}
+        },
+        {
+          name: "geometry",
+          pathName: "Geometry",
+          params: {}
+        }
+      ],
+      Spark: [
+        {
+          name: "affirmations",
+          pathName: "",
+          params: {}
+        },
+        {
+          name: "insights",
+          pathName: "",
+          params: {}
+        },
+        {
+          name: "guidance",
+          pathName: "",
+          params: {}
+        }
+      ]
+    }
   }),
+  created() {
+    console.log(this.$route);
+  }
 };
 </script>
