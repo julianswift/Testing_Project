@@ -1,7 +1,6 @@
 <template>
   <div>
     Bio
-
     <v-container>
       <v-row>
         <v-card class="elevation-10" min-width="100%">
@@ -9,10 +8,10 @@
           <v-textarea v-model="affResponse"></v-textarea>
           <v-btn block color="primary" class="my-1" @click="previousAff">Previous</v-btn>
           <v-btn block color="primary" class="my-1" @click="nextAff">Next</v-btn>
+          <v-btn block color="primary" class="my-1" @click="affToggleBtn">{{affSpeakStatus}}</v-btn>
           <v-btn block color="primary" class="my-1">Speak</v-btn>
-          <v-btn block color="primary" class="my-1">Speak Off</v-btn>
           <v-btn block color="primary" class="my-1">Update</v-btn>
-          <v-btn block color="primary" class="my-1">Update</v-btn>
+          <v-btn block color="primary" class="my-1">Delete</v-btn>
         </v-card>
       </v-row>
 
@@ -23,69 +22,66 @@
           <h4>counter: {{counter}}</h4>
         </v-card>
       </v-row>
-
     </v-container>
-
   </div>
 </template>
 
 <script>
-import staticData from '@/assets/json/affirmationDataset'
+import staticData from "@/assets/json/affirmationDataset";
 import jQuery from "jquery";
-
-var affToggleOn = false;
 
 export default {
   data() {
     return {
       // You need to register staticData as a Vue Data
       affData: staticData,
-      // Thanks to 2 ways binding, we can change this value from textarea html element 
+      // Thanks to 2 ways binding, we can change this value from textarea html element
       // and with js (vue) methods
       affResponse: null,
       counter: 0,
+      affToggleOn: false,
+      affSpeakStatus: "Speak Off"
     };
   },
   created() {
-    this.nextAff()
+    this.nextAff();
   },
   methods: {
-    setAffResponse(id){
-      const data = this.affData.find(d => d.id == id)
-      this.affResponse = data.affirmation
+    setAffResponse(id) {
+      const data = this.affData.find(d => d.id == id);
+      this.affResponse = data.affirmation;
     },
     previousAff() {
-      if(this.counter > 1){
+      if (this.counter > 1) {
         this.counter--;
-        this.setAffResponse(this.counter)
+        this.setAffResponse(this.counter);
       }
     },
-    nextAff(){
-      if(this.counter < this.affData.length) {
+    nextAff() {
+      if (this.counter < this.affData.length) {
         this.counter++;
-        this.setAffResponse(this.counter)
-      }
-    },
-/* 
-    affToggleBtn() {
-      if (affToggleOn == false) {
-        affToggleOn = true;
-        jQuery("#affToggleOn").html("Speak On");
-      } else {
-        affToggleOn = false;
-        jQuery("#affToggleOn").html("Speak Off");
+        this.setAffResponse(this.counter);
       }
     },
 
+    affToggleBtn() {
+      if (this.affToggleOn) {
+        this.affToggleOn = false;
+        this.affSpeakStatus = "Speak Off";
+      } else {
+        this.affToggleOn = true;
+        this.affSpeakStatus = "Speak On";
+      }
+    },
 
     affDelete() {
-      var confirmDelete = confirm("Click OK to go ahead with Delete or Cancel");
-      if (!confirmDelete) {
-        return;
-      }
+      // var confirmDelete = confirm("Click OK to go ahead with Delete or Cancel");
+      // if (!confirmDelete) {
+      //   return;
+      // }
     },
 
-    affUpdate() {} */
+    affUpdate() {}
   }
 };
 
