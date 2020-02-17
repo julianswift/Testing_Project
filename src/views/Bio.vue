@@ -14,12 +14,14 @@
           <!-- I'll let you know these concerns when it is done -->
           <!-- I have already built this one but let you try also. -->
 
+          <!--           
           <v-btn block color="primary" class="my-1" @click="previousAff">Previous</v-btn>
           <v-btn block color="primary" class="my-1" @click="nextAff">Next</v-btn>
           <v-btn block color="primary" class="my-1" @click="affToggleBtn">{{affSpeakStatus}}</v-btn>
           <v-btn block color="primary" class="my-1">Speak</v-btn>
           <v-btn block color="primary" class="my-1">Update</v-btn>
           <v-btn block color="primary" class="my-1">Delete</v-btn>
+          -->
         </v-card>
       </v-row>
 
@@ -30,7 +32,16 @@
           <v-textarea v-model="affResponse"></v-textarea>
 
           <!-- buttons v-for -->
-          
+
+          <v-btn
+            v-for="(button , key) in affButtons"
+            :key="key"
+            block
+            color="primary"
+            class="my-1"
+            @click="button.method"
+          >{{button.title}}</v-btn>
+
         </v-card>
       </v-row>
 
@@ -50,8 +61,17 @@ import staticData from "@/assets/json/affirmationDataset";
 import jQuery from "jquery";
 
 export default {
+  props: ["buttons", "title"],
   data() {
-    return {
+    return {  /* I tried without quotes, and also just name of method i.e method: 'previousAff' methods have not rendered at this stage */
+      affButtons: [ /* could not use buttons, as already defined as prop ......... over to you :) ........... */
+        { method: 'this.previousAff()', title: "Previous" },
+        { method: 'this.nextAff()', title: "Next" },
+        { method: 'this.affToggleBtn()', title: this.affSpeakStatus }, /* not rendered yet hence blank */
+        { method: 'this.affSpeak()', title: "Speak" },
+        { method: 'this.affUpdate()', title: "Update" },
+        { method: 'this.affDelete()', title: "Delete" }
+      ],
       // You need to register staticData as a Vue Data
       affData: staticData,
       // Thanks to 2 ways binding, we can change this value from textarea html element
@@ -63,6 +83,7 @@ export default {
     };
   },
   created() {
+    
     this.nextAff();
   },
   methods: {
@@ -82,7 +103,6 @@ export default {
         this.setAffResponse(this.counter);
       }
     },
-
     affToggleBtn() {
       if (this.affToggleOn) {
         this.affToggleOn = false;
@@ -92,15 +112,16 @@ export default {
         this.affSpeakStatus = "Speak On";
       }
     },
+    affSpeak() {},
+
+    affUpdate() {},
 
     affDelete() {
       // var confirmDelete = confirm("Click OK to go ahead with Delete or Cancel");
       // if (!confirmDelete) {
       //   return;
       // }
-    },
-
-    affUpdate() {}
+    }
   }
 };
 
