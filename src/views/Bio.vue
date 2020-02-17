@@ -6,12 +6,31 @@
         <v-card class="elevation-10" min-width="100%">
           <h3 for="affirmationText">Affirmation</h3>
           <v-textarea v-model="affResponse"></v-textarea>
+          <!-- TODO: Could you please, put these inside an array of objects -->
+          <!-- This kind of approach doesn't use in the most of the projects -->
+          <!-- However it is going to be really nice exercise -->
+          <!-- It contains really hard parts/concerns however you don't need these while -->
+          <!-- creating this business logic. -->
+          <!-- I'll let you know these concerns when it is done -->
+          <!-- I have already built this one but let you try also. -->
+
           <v-btn block color="primary" class="my-1" @click="previousAff">Previous</v-btn>
           <v-btn block color="primary" class="my-1" @click="nextAff">Next</v-btn>
           <v-btn block color="primary" class="my-1" @click="affToggleBtn">{{affSpeakStatus}}</v-btn>
           <v-btn block color="primary" class="my-1">Speak</v-btn>
           <v-btn block color="primary" class="my-1">Update</v-btn>
           <v-btn block color="primary" class="my-1">Delete</v-btn>
+        </v-card>
+      </v-row>
+
+      <!-- Let's do this here, without harming previous code -->
+      <v-row>
+        <v-card class="elevation-10" min-width="100%">
+          <h3 for="affirmationText">Affirmation</h3>
+          <v-textarea v-model="affResponse"></v-textarea>
+
+          <!-- buttons v-for -->
+          
         </v-card>
       </v-row>
 
