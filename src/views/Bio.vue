@@ -45,6 +45,8 @@
         </v-card>
       </v-row>
 
+      <div>{{affButtons}}</div>
+
       <v-row class="my-5">
         <v-card dark class="pa-5">
           <h4>affData: {{affData}}</h4>
@@ -63,14 +65,27 @@ import jQuery from "jquery";
 export default {
   props: ["buttons", "title"],
   data() {
-    return {  /* I tried without quotes, and also just name of method i.e method: 'previousAff' methods have not rendered at this stage */
-      affButtons: [ /* could not use buttons, as already defined as prop ......... over to you :) ........... */
-        { method: 'this.previousAff()', title: "Previous" },
-        { method: 'this.nextAff()', title: "Next" },
-        { method: 'this.affToggleBtn()', title: this.affSpeakStatus }, /* not rendered yet hence blank */
-        { method: 'this.affSpeak()', title: "Speak" },
-        { method: 'this.affUpdate()', title: "Update" },
-        { method: 'this.affDelete()', title: "Delete" }
+    return { 
+      // First of all you need to set these as a method not string, such as this.previousAff()
+      // Second, if you put () at the end of method, you will run this function when this object created which we don't want to do that.
+      // we want to call it when the button clicked not object created. Let's remove (), such as this.previousAff
+      // Try to take a look at console log with (), you will see previousAff called lines when page loaded.
+
+      // This is all working fine as expected on the surface, if you click buttons you will see all buttons can be clicked and working (have a look at console)
+      // The weird thing is, let's try to render this affButtons object
+      // As you see, the response is [ { "title": "Previous" }, { "title": "Next" }, {}, { "title": "Speak" }, { "title": "Update" }, { "title": "Delete" } ]
+      // The question is where is the method fields, and where is the title for affSpeakStatus (it renders empty object)
+      // Also we can't see even the dynamic text on the button as well as you detected. 
+      // Let's sort out button text issue first. 
+      // GO TO NEXT COMMIT
+
+      affButtons: [
+        { method: this.previousAff, title: "Previous" },
+        { method: this.nextAff, title: "Next" },
+        { method: this.affToggleBtn, title: this.affSpeakStatus }, /* not rendered yet hence blank */
+        { method: this.affSpeak, title: "Speak" },
+        { method: this.affUpdate, title: "Update" },
+        { method: this.affDelete, title: "Delete" }
       ],
       // You need to register staticData as a Vue Data
       affData: staticData,
@@ -92,18 +107,21 @@ export default {
       this.affResponse = data.affirmation;
     },
     previousAff() {
+      console.log('previousAff called')
       if (this.counter > 1) {
         this.counter--;
         this.setAffResponse(this.counter);
       }
     },
     nextAff() {
+      console.log('nextAff called')
       if (this.counter < this.affData.length) {
         this.counter++;
         this.setAffResponse(this.counter);
       }
     },
     affToggleBtn() {
+      console.log('affToggleBtn called')
       if (this.affToggleOn) {
         this.affToggleOn = false;
         this.affSpeakStatus = "Speak Off";
@@ -112,15 +130,16 @@ export default {
         this.affSpeakStatus = "Speak On";
       }
     },
-    affSpeak() {},
+    affSpeak() {
+      console.log('affSpeak called')
+    },
 
-    affUpdate() {},
+    affUpdate() {
+      console.log('affUpdate called')
+    },
 
     affDelete() {
-      // var confirmDelete = confirm("Click OK to go ahead with Delete or Cancel");
-      // if (!confirmDelete) {
-      //   return;
-      // }
+     console.log('affDelete called')
     }
   }
 };
