@@ -79,14 +79,16 @@ export default {
       // Let's sort out button text issue first. 
       // GO TO NEXT COMMIT
 
-      affButtons: [
-        { method: this.previousAff, title: "Previous" },
-        { method: this.nextAff, title: "Next" },
-        { method: this.affToggleBtn, title: this.affSpeakStatus }, /* not rendered yet hence blank */
-        { method: this.affSpeak, title: "Speak" },
-        { method: this.affUpdate, title: "Update" },
-        { method: this.affDelete, title: "Delete" }
-      ],
+      // ----------------- COMMIT 2 ------------------------
+      // Let's put all this static button array of objects into a method and return the array
+      // Call setAffButtons when instance created 
+      // At this point actually there is no difference than putting this array into data. 
+      // Again we can use method functionalities, this time at least we can see Speak Off (which is coming from dynamic field of affSpeakStatus)
+      // but the problem is again we can't see any changes when we clicked affToggleBtn. 
+      // remember it is working properly, you can see if you render {{affSpeakStatus}} in the template, problem is, it is not reflected on button text.
+      // solution is easy, let's define a watcher
+
+      affButtons: [],
       // You need to register staticData as a Vue Data
       affData: staticData,
       // Thanks to 2 ways binding, we can change this value from textarea html element
@@ -98,10 +100,36 @@ export default {
     };
   },
   created() {
-    
+    this.setAffButtons();
     this.nextAff();
   },
+  watch: {
+    // this should be same name with the data/prop name
+    affSpeakStatus(val) {
+      console.log('You can listen changed value if you want, it is redundant for this example though', val)
+      // We are overwriting the button object when the affSpeakStatus changed, because the reason of the problem
+      // not seeing changed value of affSpeakStatus inside affButtons related object
+      // when data changed, the button array/object which has dependent dynamic field isn't updated. It is non-reactive
+      // This totally solve every problems from the functionality point of view.
+      
+      /* this.setAffButtons() */
+
+      // If you want you can directly reach affButtons array, select the particular object
+      // update only that object instead of overwriting whole array.
+      this.affButtons[2].title = val
+    }
+  },
   methods: {
+    setAffButtons() {
+      this.affButtons = [
+        { method: this.previousAff, title: "Previous" },
+        { method: this.nextAff, title: "Next" },
+        { method: this.affToggleBtn, title: this.affSpeakStatus },
+        { method: this.affSpeak, title: "Speak" },
+        { method: this.affUpdate, title: "Update" },
+        { method: this.affDelete, title: "Delete" }
+      ]
+    },
     setAffResponse(id) {
       const data = this.affData.find(d => d.id == id);
       this.affResponse = data.affirmation;
