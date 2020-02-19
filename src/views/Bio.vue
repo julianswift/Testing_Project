@@ -14,14 +14,14 @@
           <!-- I'll let you know these concerns when it is done -->
           <!-- I have already built this one but let you try also. -->
 
-          <!--           
+                    
           <v-btn block color="primary" class="my-1" @click="previousAff">Previous</v-btn>
           <v-btn block color="primary" class="my-1" @click="nextAff">Next</v-btn>
           <v-btn block color="primary" class="my-1" @click="affToggleBtn">{{affSpeakStatus}}</v-btn>
           <v-btn block color="primary" class="my-1">Speak</v-btn>
           <v-btn block color="primary" class="my-1">Update</v-btn>
           <v-btn block color="primary" class="my-1">Delete</v-btn>
-          -->
+         
         </v-card>
       </v-row>
 
@@ -100,36 +100,36 @@ export default {
     };
   },
   created() {
-    this.setAffButtons();
+    // this.setAffButtons();
     this.nextAff();
   },
-  watch: {
-    // this should be same name with the data/prop name
-    affSpeakStatus(val) {
-      console.log('You can listen changed value if you want, it is redundant for this example though', val)
-      // We are overwriting the button object when the affSpeakStatus changed, because the reason of the problem
-      // not seeing changed value of affSpeakStatus inside affButtons related object
-      // when data changed, the button array/object which has dependent dynamic field isn't updated. It is non-reactive
-      // This totally solve every problems from the functionality point of view.
+  // watch: {
+  //   // this should be same name with the data/prop name
+  //   affSpeakStatus(val) {
+  //     console.log('You can listen changed value if you want, it is redundant for this example though', val)
+  //     // We are overwriting the button object when the affSpeakStatus changed, because the reason of the problem
+  //     // not seeing changed value of affSpeakStatus inside affButtons related object
+  //     // when data changed, the button array/object which has dependent dynamic field isn't updated. It is non-reactive
+  //     // This totally solve every problems from the functionality point of view.
       
-      /* this.setAffButtons() */
+  //     /* this.setAffButtons() */
 
-      // If you want you can directly reach affButtons array, select the particular object
-      // update only that object instead of overwriting whole array.
-      this.affButtons[2].title = val
-    }
-  },
+  //     // If you want you can directly reach affButtons array, select the particular object
+  //     // update only that object instead of overwriting whole array.
+  //     this.affButtons[2].title = val
+  //   }
+  // },
   methods: {
-    setAffButtons() {
-      this.affButtons = [
-        { method: this.previousAff, title: "Previous" },
-        { method: this.nextAff, title: "Next" },
-        { method: this.affToggleBtn, title: this.affSpeakStatus },
-        { method: this.affSpeak, title: "Speak" },
-        { method: this.affUpdate, title: "Update" },
-        { method: this.affDelete, title: "Delete" }
-      ]
-    },
+    // setAffButtons() {
+    //   this.affButtons = [
+    //     { method: this.previousAff, title: "Previous" },
+    //     { method: this.nextAff, title: "Next" },
+    //     { method: this.affToggleBtn, title: this.affSpeakStatus },
+    //     { method: this.affSpeak, title: "Speak" },
+    //     { method: this.affUpdate, title: "Update" },
+    //     { method: this.affDelete, title: "Delete" }
+    //   ]
+    // },
     setAffResponse(id) {
       const data = this.affData.find(d => d.id == id);
       this.affResponse = data.affirmation;
