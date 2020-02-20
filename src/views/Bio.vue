@@ -17,10 +17,10 @@
                     
           <v-btn block color="primary" class="my-1" @click="previousAff">Previous</v-btn>
           <v-btn block color="primary" class="my-1" @click="nextAff">Next</v-btn>
-          <v-btn block color="primary" class="my-1" @click="affToggleBtn">{{affSpeakStatus}}</v-btn>
-          <v-btn block color="primary" class="my-1">Speak</v-btn>
-          <v-btn block color="primary" class="my-1">Update</v-btn>
-          <v-btn block color="primary" class="my-1">Delete</v-btn>
+          <v-btn block color="primary" class="my-1" @click="affSpeakStatus = !affSpeakStatus">{{affSpeakStatus ? 'Speak On' : 'Speak Off'}}</v-btn>
+          <v-btn block color="primary" class="my-1" @click="affSpeak">Speak</v-btn>
+          <v-btn block color="primary" class="my-1" @click="affUpdate">Update</v-btn>
+          <v-btn block color="primary" class="my-1" @click="affDelete">Delete</v-btn>
          
         </v-card>
       </v-row>
@@ -95,8 +95,7 @@ export default {
       // and with js (vue) methods
       affResponse: null,
       counter: 0,
-      affToggleOn: false,
-      affSpeakStatus: "Speak Off"
+      affSpeakStatus: false,
     };
   },
   created() {
@@ -146,16 +145,6 @@ export default {
       if (this.counter < this.affData.length) {
         this.counter++;
         this.setAffResponse(this.counter);
-      }
-    },
-    affToggleBtn() {
-      console.log('affToggleBtn called')
-      if (this.affToggleOn) {
-        this.affToggleOn = false;
-        this.affSpeakStatus = "Speak Off";
-      } else {
-        this.affToggleOn = true;
-        this.affSpeakStatus = "Speak On";
       }
     },
     affSpeak() {
