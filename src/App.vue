@@ -59,12 +59,12 @@ export default {
       Spark: [
         {
           name: "affirmations",
-          pathName: "",
-          params: {}
+          pathName: "Affirmations",
+          params: {mID: 1}
         },
         {
           name: "insights",
-          pathName: "",
+          pathName: "Insights",
           params: {}
         },
         {

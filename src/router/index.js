@@ -14,6 +14,8 @@ import Body from '@/views/Body'
   import Geometry from '@/views/Body/Geometry'
   import Meditation from '@/views/Body/Meditation'
 import Spark from '@/views/Spark'
+  import Affirmations from '@/views/Spark/Affirmations'
+  import Insights from '@/views/Spark/Insights'
 import Bio from '@/views/Bio'
 
 const routes = [
@@ -76,7 +78,24 @@ const routes = [
   {
     path: '/spark',
     name: 'Spark',
-    component: Spark
+    component: Spark,
+    children: [
+      {
+        path: 'affirmations/:mID',
+        name: 'Affirmations',
+        component: Affirmations
+      },
+      {
+        path: 'insights',
+        name: 'Insights',
+        component: Insights
+      },
+      {
+        path: 'geometry',
+        name: 'Geometry',
+        component: Geometry
+      },
+    ]
   },
   {
     path: '/bio',

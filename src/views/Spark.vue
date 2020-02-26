@@ -1,11 +1,11 @@
 <template>
   <div>
-    Spark
-    <h3>
-      For header examples, take a look at
-      <router-link to="body">BODY</router-link>
-    </h3>
+    <h3 class="mx-5">Spark</h3>
 
+    <router-view></router-view>
+
+    <hr><hr> 
+    <h3>As you remember these all comes from parent component</h3>
     <v-container>
       <v-row class="my-5">
         <v-card class="elevation-10" min-width="100%">
