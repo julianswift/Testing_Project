@@ -46,6 +46,11 @@ export default {
           params: {mID: 1}
         },
         {
+          name: "Meditation Calendar",
+          pathName: "MeditationCalendar",
+          params: {}
+        },
+        {
           name: "body-focus",
           pathName: "BodyFocus",
           params: {}

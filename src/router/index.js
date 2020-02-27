@@ -13,6 +13,7 @@ import Body from '@/views/Body'
   import BodyFocus from '@/views/Body/BodyFocus'
   import Geometry from '@/views/Body/Geometry'
   import Meditation from '@/views/Body/Meditation'
+  import MeditationCalendar from '@/views/Body/MeditationCalendar'
 import Spark from '@/views/Spark'
   import Affirmations from '@/views/Spark/Affirmations'
   import Insights from '@/views/Spark/Insights'
@@ -62,6 +63,11 @@ const routes = [
         path: 'meditation/:mID',
         name: 'Meditation',
         component: Meditation
+      },
+      {
+        path: 'meditationcalendar',
+        name: 'MeditationCalendar',
+        component: MeditationCalendar
       },
       {
         path: 'body-focus',
