@@ -13,6 +13,8 @@
           </Span>
         </a>
 
+        {{backgrounds}}
+
         <div class="grid-item">3</div>
         <div class="grid-item">4</div>
         <div class="grid-item">5</div>
@@ -38,16 +40,15 @@ import bg2 from "@/assets/backgrounds/bg2.png";
 export default {
   data() {
     return {
-      backgroundImageSrc: this.backgrounds[0].imageName,
-      backgroundImageAlt: this.backgrounds[0].alt
+      selected: 0
     }
   },
   computed: {
     backgroundImageSrc() {
-      return this.backgrounds[0].imageName;
+      return this.backgrounds[this.selected].imageName;
     },
-    backgroundImageAlt() {
-      return this.backgrounds[0].alt;
+    backgroundImageAlt(i) {
+      return this.backgrounds[this.selected].alt;
     },
     backgrounds: function() {
       return [
@@ -56,19 +57,9 @@ export default {
       ];
     }
   },
-  watch: {
-    backgroundImageSrc(bgId) {
-      this.backgroundImageSrc = this.backgrounds[bgId].imageName;
-    },
-    backgroundImageAlt(bgId) {
-      this.backgroundImageAlt = this.backgrounds[bgId].alt;
-    }
-  },
   methods: {
     swapImage(bgId) {
-      console.log(bgId);
-      this.backgroundImageSrc = this.backgrounds[bgId].imageName;
-      this.backgroundImageAlt = this.backgrounds[bgId].alt;
+      this.selected = bgId
     }
   }
 };
