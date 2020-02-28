@@ -12,8 +12,8 @@
             <div class="grid-item">2</div>
           </Span>
         </a>
-
-        {{backgrounds}}
+        <!-- 
+        {{backgrounds}}-->
 
         <div class="grid-item">3</div>
         <div class="grid-item">4</div>
@@ -26,6 +26,16 @@
       <div class="bgImageContainer grid-item">
         <img :src="backgroundImageSrc" :alt="backgroundImageAlt" width="100%" />
       </div>
+
+      <div class="audioContainer">
+        <figure>
+          <figcaption>Audio Background</figcaption>
+          <audio id="audioControls" controls :src="backgroundAudio">
+            Your browser does not support the
+            <code>audio</code> element.
+          </audio>
+        </figure>
+      </div>
     </div>
 
     <!-- <router-view> render children components -->
@@ -36,30 +46,35 @@
 <script>
 import bg1 from "@/assets/backgrounds/bg1.png";
 import bg2 from "@/assets/backgrounds/bg2.png";
+import a1 from "@/assets/audio/a1.mp3";
+import a2 from "@/assets/audio/a2.mp3";
 
 export default {
   data() {
     return {
-      selected: 0
-    }
+      selected: 0,
+    };
   },
   computed: {
     backgroundImageSrc() {
       return this.backgrounds[this.selected].imageName;
     },
-    backgroundImageAlt(i) {
+    backgroundImageAlt() {
       return this.backgrounds[this.selected].alt;
+    },
+    backgroundAudio() {
+      return this.backgrounds[this.selected].audio;
     },
     backgrounds: function() {
       return [
-        { imageName: bg1, id: 1, alt: "Gardens 1" },
-        { imageName: bg2, id: 2, alt: "Gardens 2" }
+        { imageName: bg1, id: 1, alt: "Gardens 1", audio: a1},
+        { imageName: bg2, id: 2, alt: "Gardens 2", audio: a2 }
       ];
     }
   },
   methods: {
     swapImage(bgId) {
-      this.selected = bgId
+      this.selected = bgId;
     }
   }
 };
@@ -74,6 +89,18 @@ export default {
 </script>
 
 <style lang="scss" scoped>
+.audioContainer {
+  position: absolute;
+  bottom: 17%;
+  left: 0%;
+  width:40%;
+} 
+figure {
+  padding: 1rem;
+}
+#audioControls {
+ width:100%;
+}
 .bgImageContainer {
   background-color: #2196f3;
   display: grid;
