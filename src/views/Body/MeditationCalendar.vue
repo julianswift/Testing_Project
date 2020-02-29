@@ -12,8 +12,8 @@
             <div class="grid-item">2</div>
           </Span>
         </a>
-        <!-- 
-        {{backgrounds}}-->
+<!--         
+        {{backgrounds}} -->
 
         <div class="grid-item">3</div>
         <div class="grid-item">4</div>
@@ -23,6 +23,7 @@
         <div class="grid-item">8</div>
         <div class="grid-item">9</div>
       </div>
+      <BGOverlay></BGOverlay>
       <div class="bgImageContainer grid-item">
         <img :src="backgroundImageSrc" :alt="backgroundImageAlt" width="100%" />
       </div>
@@ -48,8 +49,21 @@ import bg1 from "@/assets/backgrounds/bg1.png";
 import bg2 from "@/assets/backgrounds/bg2.png";
 import a1 from "@/assets/audio/a1.mp3";
 import a2 from "@/assets/audio/a2.mp3";
+import BGOverlay from "@/components/static/BGOverlay";
+
+// Vue.component('button-counter', {
+//   data: function () {
+//     return {
+      
+//     }
+//   },
+//   template: ''
+// )}
 
 export default {
+  components: {
+   BGOverlay
+  },
   data() {
     return {
       selected: 0,
@@ -67,7 +81,7 @@ export default {
     },
     backgrounds: function() {
       return [
-        { imageName: bg1, id: 1, alt: "Gardens 1", audio: a1},
+        { imageName: bg1, id: 1, alt: "Gardens 1", audio: a1, },
         { imageName: bg2, id: 2, alt: "Gardens 2", audio: a2 }
       ];
     }
