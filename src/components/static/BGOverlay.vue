@@ -1,16 +1,19 @@
 <template>
   <div class="contents">
-    <h1>Background Overlay</h1>
-    <v-spacer></v-spacer>
-    <p>Contents</p>
+    <h3>{{myPropBackgroundImageAlt}}</h3>
   </div>
 </template>
 
 <script>
+
+import meditationStore from "@/store/meditation";
+
 export default {
+  props: ["myPropBackgroundImageAlt"],
   data() {
     return {
-      
+      title: meditationStore.data.textOverlays[0].title,
+      contents:  meditationStore.data.textOverlays[0].contents
     };
   },
   methods: {}
@@ -23,10 +26,9 @@ a {
 }
 .contents {
   position: absolute;
-  top: 5%;
+  bottom: 5%;
   left: 40%;
   width: 60%;
-  padding-top: 5rem;
   text-align: center;
   z-index: 9;
 }

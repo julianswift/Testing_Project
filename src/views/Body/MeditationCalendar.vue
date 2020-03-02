@@ -12,8 +12,8 @@
             <div class="grid-item">2</div>
           </Span>
         </a>
-<!--         
-        {{backgrounds}} -->
+        <!--         
+        {{backgrounds}}-->
 
         <div class="grid-item">3</div>
         <div class="grid-item">4</div>
@@ -23,7 +23,15 @@
         <div class="grid-item">8</div>
         <div class="grid-item">9</div>
       </div>
-      <BGOverlay></BGOverlay>
+
+      <div class="contents">
+        <h1>{{title}}</h1>
+        <v-spacer></v-spacer>
+        <p>{{contents}}</p>
+      </div>
+
+      <BGOverlay v-bind:myPropBackgroundImageAlt="backgroundImageAlt"></BGOverlay>
+
       <div class="bgImageContainer grid-item">
         <img :src="backgroundImageSrc" :alt="backgroundImageAlt" width="100%" />
       </div>
@@ -49,12 +57,14 @@ import bg1 from "@/assets/backgrounds/bg1.png";
 import bg2 from "@/assets/backgrounds/bg2.png";
 import a1 from "@/assets/audio/a1.mp3";
 import a2 from "@/assets/audio/a2.mp3";
+
 import BGOverlay from "@/components/static/BGOverlay";
+import meditationStore from "@/store/meditation";
 
 // Vue.component('button-counter', {
 //   data: function () {
 //     return {
-      
+
 //     }
 //   },
 //   template: ''
@@ -62,11 +72,13 @@ import BGOverlay from "@/components/static/BGOverlay";
 
 export default {
   components: {
-   BGOverlay
+    BGOverlay /* same as: BGOverlay: BGOverlay, */
   },
   data() {
     return {
-      selected: 0,
+      selected: 0
+      // title: meditationStore.data.textOverlays[0].title,
+      // contents:  meditationStore.data.textOverlays[0].contents
     };
   },
   computed: {
@@ -79,9 +91,15 @@ export default {
     backgroundAudio() {
       return this.backgrounds[this.selected].audio;
     },
+    title() {
+      return meditationStore.data.textOverlays[this.selected].title;
+    },
+    contents() {
+      return meditationStore.data.textOverlays[this.selected].contents;
+    },
     backgrounds: function() {
       return [
-        { imageName: bg1, id: 1, alt: "Gardens 1", audio: a1, },
+        { imageName: bg1, id: 1, alt: "Gardens 1", audio: a1 },
         { imageName: bg2, id: 2, alt: "Gardens 2", audio: a2 }
       ];
     }
@@ -103,17 +121,29 @@ export default {
 </script>
 
 <style lang="scss" scoped>
+a {
+  text-decoration: none;
+}
+.contents {
+  position: absolute;
+  top: 5%;
+  left: 40%;
+  width: 60%;
+  padding-top: 5rem;
+  text-align: center;
+  z-index: 9;
+}
 .audioContainer {
   position: absolute;
   bottom: 17%;
   left: 0%;
-  width:40%;
-} 
+  width: 40%;
+}
 figure {
   padding: 1rem;
 }
 #audioControls {
- width:100%;
+  width: 100%;
 }
 .bgImageContainer {
   background-color: #2196f3;
